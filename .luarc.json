@@ -1,0 +1,10 @@
+{
+    "diagnostics.disable": [
+        "missing-fields",
+        "param-type-mismatch",
+        "undefined-field",
+        "missing-parameter",
+        "duplicate-set-field",
+        "need-check-nil"
+    ]
+}

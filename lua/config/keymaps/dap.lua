@@ -1,0 +1,10 @@
+return function(map)
+  map("n", "<leader>dt", require("dap").toggle_breakpoint, { desc = "Toggle breakpoint" })
+  map("n", "<leader>dc", require("dap").continue, { desc = "Start/Continue" })
+  map("n", "<leader>di", require("dap").step_into, { desc = "Step Into" })
+  map("n", "<leader>do", require("dap").step_over, { desc = "Step Over" })
+  map("n", "<leader>du", require("dap").step_out, { desc = "Step Out" })
+  map("n", "<leader>da", function()
+    require("dapui").toggle()
+  end, { desc = "Toggle Debugger UI" })
+end
