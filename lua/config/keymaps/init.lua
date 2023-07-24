@@ -11,12 +11,14 @@ local function map(mode, lhs, rhs, opts)
 end
 
 require("config.keymaps.core")(map)
-require("config.keymaps.dap")(map)
 require("config.keymaps.git")(map)
 require("config.keymaps.terminal")(map)
 require("config.keymaps.navigation")(map)
 require("config.keymaps.code")(map)
 require("config.keymaps.telescope")(map)
+if vim.fn.has("win32") == 0 then
+  require("config.keymaps.dap")(map)
+end
 -- Plugin Manager
 
 -- navigation ---------------------------------------------------------------------------------------------

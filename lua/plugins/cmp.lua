@@ -3,7 +3,7 @@ return {
     "L3MON4D3/LuaSnip",
     build = vim.fn.has("win32") == 0
         and "echo 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
-      or nil,
+        or nil,
     dependencies = {
       "rafamadriz/friendly-snippets",
       config = function()
@@ -35,6 +35,7 @@ return {
       "saadparwaiz1/cmp_luasnip",
       {
         "rcarriga/cmp-dap",
+        enabled = vim.fn.has("win32") == 0,
         dependencies = { "nvim-cmp" },
         config = function()
           require("cmp").setup.filetype({ "dap-repl", "dapui_watches", "dapui_hover" }, {
@@ -81,10 +82,10 @@ return {
       return {
         enabled = function()
           local dap_prompt = util.has("cmp-dap") -- add interoperability with cmp-dap
-            and vim.tbl_contains(
-              { "dap-repl", "dapui_watches", "dapui_hover" },
-              vim.api.nvim_get_option_value("filetype", { buf = 0 })
-            )
+              and vim.tbl_contains(
+                { "dap-repl", "dapui_watches", "dapui_hover" },
+                vim.api.nvim_get_option_value("filetype", { buf = 0 })
+              )
           if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt" and not dap_prompt then
             return false
           end
@@ -154,9 +155,9 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp", priority = 1000 },
-          { name = "luasnip", priority = 750 },
-          { name = "buffer", priority = 500 },
-          { name = "path", priority = 250 },
+          { name = "luasnip",  priority = 750 },
+          { name = "buffer",   priority = 500 },
+          { name = "path",     priority = 250 },
         }),
         experimental = {
           ghost_text = {
