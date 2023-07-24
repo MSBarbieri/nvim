@@ -7,13 +7,13 @@ function M.setup(opts)
   M.icons = require("config.icons")
   M.options = vim.tbl_deep_extend("force", M.defaults, opts or {})
 
+  M.load_options()
   require("config.lazy").setup()
 
   vim.api.nvim_create_autocmd("User", {
     group = vim.api.nvim_create_augroup("Setup", { clear = true }),
     pattern = "VeryLazy",
     callback = function()
-      M.load_options()
       M.load_module("autocmds")
       M.load_module("keymaps")
     end,
@@ -23,14 +23,7 @@ function M.setup(opts)
 end
 
 function M.load_options()
-  require("lazy.core.util").try(function()
-    require("config.options").setup(M.options)
-  end, {
-    msg = "failed to load options",
-    on_error = function(msg)
-      require("lazy.core.util").error(msg)
-    end,
-  })
+  require("config.options").setup(M.options)
 end
 
 function M.load_theme()

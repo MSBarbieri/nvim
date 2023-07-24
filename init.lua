@@ -1,8 +1,4 @@
 -- Created By msbarbieri <matheussouzabariberi@gmail.com>
---
-vim.g.mapleader = " "
-vim.g.maplocalleader = "\\"
-vim.opt.termguicolors = true -- True color support
 
 local opts = {
   colorscheme = function()
@@ -10,20 +6,22 @@ local opts = {
   end,
   g = {
     cmp_enabled = true,
+    mapleader = " ",
+    maplocalleader = "\\",
   },
   opt = {
-    breakindent = true, -- Wrap indent to match  line start
+    breakindent = false, -- Wrap indent to match  line start
     clipboard = "unnamedplus", -- Connection to the system clipboard
     cmdheight = 0, -- hide command line unless needed
     completeopt = { "menu", "menuone", "noselect" }, -- Options for insert mode completion
     copyindent = true, -- Copy the previous indentation on autoindenting
-    cursorline = true, -- Highlight the text line of the cursor
+    cursorline = false, -- Highlight the text line of the cursor
     expandtab = true, -- Enable the use of space in tab
     history = 100, -- Number of commands to remember in a history table
     ignorecase = true, -- Case insensitive searching
     infercase = true, -- Infer cases in keyword completion
     laststatus = 3, -- globalstatus
-    linebreak = true, -- Wrap lines at 'breakat'
+    linebreak = false, -- Wrap lines at 'breakat'
     mouse = "a", -- Enable mouse support
     number = true, -- Show numberline
     preserveindent = true, -- Preserve indent structure as much as possible
@@ -32,14 +30,12 @@ local opts = {
     scrolloff = 8, -- Number of lines to keep above and below the cursor
     shiftwidth = 2, -- Number of space inserted for indentation
     showmode = false, -- Disable showing modes in command line
-    showtabline = 2, -- always display tabline
     sidescrolloff = 8, -- Number of columns to keep at the sides of the cursor
     signcolumn = "yes", -- Always show the sign column
     smartcase = true, -- Case sensitivie searching
     splitbelow = true, -- Splitting a new window below the current one
     splitright = true, -- Splitting a new window at the right of the current one
     tabstop = 2, -- Number of space in a tab
-    termguicolors = true, -- Enable 24-bit RGB color in the TUI
     timeoutlen = 500, -- Shorten key timeout length a little bit for which-key
     undofile = true, -- Enable persistent undo
     updatetime = 300, -- Length of time to wait before triggering the plugin
@@ -51,8 +47,8 @@ local opts = {
     foldlevelstart = 99,
     foldenable = true,
     fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
+    termguicolors = true, -- Enable 24-bit RGB color in the TUI
   },
 }
 
-local config = require("config")
-config.setup(opts)
+require("config").setup(opts)

@@ -184,4 +184,8 @@ return {
     event = { "BufReadPost", "BufNewFile" },
     config = true,
   },
+  {
+    "ThePrimeagen/harpoon",
+    dependencies = { "nvim-lua/plenary.nvim" },
+  },
 }

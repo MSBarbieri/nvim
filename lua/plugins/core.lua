@@ -12,8 +12,6 @@ return {
         FloatBorder = { link = "FloatBorder" },
         StatusLine = { link = "StatusLine" },
         StatusLineNC = { link = "StatusLineNC" },
-        WinBar = { link = "WinBar" },
-        WinBarNC = { link = "WinBarNC" },
       },
       size = 10,
       open_mapping = [[<F7>]],

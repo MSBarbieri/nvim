@@ -36,4 +36,12 @@ return function(map)
   end, {
     desc = "Source Action",
   })
+
+  map("n", "<leader>z", function()
+    require("zen-mode").toggle({
+      window = {
+        width = 0.85, -- width will be 85% of the editor width
+      },
+    })
+  end, { silent = true, nowait = true, desc = "Zoom Window" })
 end
