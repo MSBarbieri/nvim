@@ -183,6 +183,32 @@ return {
     cmd = { "TodoTrouble", "TodoTelescope" },
     event = { "BufReadPost", "BufNewFile" },
     config = true,
+    opts = {
+      highlight = {
+        before = "",
+        keyword = "bg",
+        after = "fg",
+        pattern = [[.*<(KEYWORDS)\s?(\([^\)]*\))?:]],
+        comments_only = true,
+      },
+      -- TODO: TODO
+      -- HACK: HACK
+      -- WARN: WARN, WARNING, XXX
+      -- FIX:  FIX, FIXME, BUG, FIXIT, ISSUE
+      -- PERF: PERF, OPTIM, PERFORMANCE, OPTIMIZE
+      -- NOTE: NOTE, INFO
+      -- TEST: TEST TESTING PASSED FAILED
+      search = {
+        command = "rg",
+        args = {
+          "--no-heading",
+          "--with-filename",
+          "--line-number",
+          "--column",
+        },
+        pattern = [[\b(KEYWORDS)\s?(\([^\)]*\))?:]],
+      },
+    },
   },
   {
     "ThePrimeagen/harpoon",
