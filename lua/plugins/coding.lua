@@ -117,4 +117,16 @@ return {
     "folke/zen-mode.nvim",
     opts = {},
   },
+  {
+    "RishabhRD/nvim-cheat.sh",
+    dependencies = {
+      "RishabhRD/popfix",
+    },
+  },
+  {
+    "sourcegraph/sg.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    build = "nvim -l build/init.lua",
+    opts = {},
+  },
 }
