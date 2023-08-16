@@ -11,6 +11,10 @@ return {
         return math.floor(vim.o.columns * 0.75)
       end,
     },
+    config = function(opts)
+      opts.background_colour = "#000000"
+      require("notify").setup(opts)
+    end,
   },
 
   -- better vim.ui
