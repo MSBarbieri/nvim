@@ -16,9 +16,7 @@ require("config.keymaps.terminal")(map)
 require("config.keymaps.navigation")(map)
 require("config.keymaps.code")(map)
 require("config.keymaps.telescope")(map)
-if vim.fn.has("win32") == 0 then
-  require("config.keymaps.dap")(map)
-end
+require("config.keymaps.dap")(map)
 -- Plugin Manager
 
 -- navigation ---------------------------------------------------------------------------------------------
