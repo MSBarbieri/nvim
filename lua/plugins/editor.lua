@@ -1,5 +1,4 @@
 local Util = require("util")
-
 return {
   {
     "nvim-neo-tree/neo-tree.nvim",

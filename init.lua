@@ -1,9 +1,7 @@
 -- Created By msbarbieri <matheussouzabariberi@gmail.com>
 
 local opts = {
-  colorscheme = function()
-    require("tokyonight").load()
-  end,
+  colorscheme = "catppuccin",
   g = {
     cmp_enabled = true,
     mapleader = " ",

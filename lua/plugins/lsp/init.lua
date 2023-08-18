@@ -28,6 +28,7 @@ return {
         },
         severity_sort = true,
         signs = { active = require("plugins.lsp.format").signs() },
+        float = { border = "single" },
       },
       inlay_hints = {
         enabled = false,
