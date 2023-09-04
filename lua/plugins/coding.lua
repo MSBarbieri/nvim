@@ -11,7 +11,7 @@ return {
     "jghauser/fold-cycle.nvim",
     config = function()
       require("fold-cycle").setup({
-        open_if_max_closed = true, -- closing a fully closed fold will open it
+        open_if_max_closed = true,  -- closing a fully closed fold will open it
         close_if_max_opened = true, -- opening a fully open fold will close it
       })
     end,
@@ -96,8 +96,8 @@ return {
         -- configuration goes here, for example:
         relculright = true,
         segments = {
-          { text = { "%s" }, click = "v:lua.ScSa" },
-          { text = { builtin.lnumfunc }, click = "v:lua.ScLa" },
+          { text = { "%s" },                       click = "v:lua.ScSa" },
+          { text = { builtin.lnumfunc },           click = "v:lua.ScLa" },
           { text = { " ", builtin.foldfunc, " " }, click = "v:lua.ScFa" },
           --   { text = { builtin.foldfunc }, click = "v:lua.ScFa" },
           --   {
@@ -123,4 +123,10 @@ return {
       "RishabhRD/popfix",
     },
   },
+  {
+    'windwp/nvim-autopairs',
+    event = "InsertEnter",
+    opts = {} -- this is equalent to setup({}) function
+  },
+  { 'ionide/Ionide-vim' }
 }

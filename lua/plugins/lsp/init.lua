@@ -6,9 +6,11 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       { "folke/neoconf.nvim", cmd = "Neoconf", config = false, dependencies = { "nvim-lspconfig" } },
-      { "folke/neodev.nvim", opts = {} },
+      { "folke/neodev.nvim",  opts = {} },
       "mason.nvim",
       "williamboman/mason-lspconfig.nvim",
+      'Issafalcon/lsp-overloads.nvim',
+      'Hoffs/omnisharp-extended-lsp.nvim',
       {
         "hrsh7th/cmp-nvim-lsp",
         cond = function()
@@ -105,16 +107,31 @@ return {
         end)
       end
 
+      Util.on_attach(function(client, _)
+        if client.server_capabilities.signatureHelpProvider then
+          require('lsp-overloads').setup(client, {
+            keymaps = {
+              next_signature = "<C-j>",
+              previous_signature = "<C-k>",
+              next_parameter = "<C-l>",
+              previous_parameter = "<C-h>",
+              close_signature = "<A-s>"
+            },
+            display_automatically = true -- Uses trigger characters to automatically display the signature overloads when typing a method signature
+          })
+        end
+      end)
+
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
-          or function(diagnostic)
-            local icons = require("config").icons.diagnostics
-            for d, icon in pairs(icons) do
-              if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-                return icon
+            or function(diagnostic)
+              local icons = require("config").icons.diagnostics
+              for d, icon in pairs(icons) do
+                if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
+                  return icon
+                end
               end
             end
-          end
       end
 
       vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
@@ -127,15 +144,16 @@ return {
         vim.lsp.protocol.make_client_capabilities(),
         has_cmp and cmp_nvim_lsp.default_capabilities() or {},
         opts.capabilities
-          or {
-            textDocument = { foldingRange = { dynamicRegistration = false, lineFoldingOnly = true } },
-          }
+        or {
+          textDocument = { foldingRange = { dynamicRegistration = false, lineFoldingOnly = true } },
+        }
       )
 
       local function setup(server)
         local server_opts = vim.tbl_deep_extend("force", {
           capabilities = vim.deepcopy(capabilities),
         }, servers[server] or {})
+
 
         if opts.setup[server] then
           if opts.setup[server](server, server_opts) then
@@ -146,6 +164,7 @@ return {
             return
           end
         end
+
         require("lspconfig")[server].setup(server_opts)
       end
 
@@ -157,6 +176,13 @@ return {
       end
 
       local ensure_installed = {} ---@type string[]
+
+      servers.omnisharp = {
+        handlers = {
+          ["textDocument/definition"] = require('omnisharp_extended').handler,
+        },
+      }
+
       for server, server_opts in pairs(servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
@@ -196,7 +222,6 @@ return {
           nls.builtins.diagnostics.fish,
           nls.builtins.formatting.stylua,
           nls.builtins.formatting.shfmt,
-          -- nls.builtins.diagnostics.flake8,
         },
       }
     end,

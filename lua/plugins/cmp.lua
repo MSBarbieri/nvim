@@ -1,6 +1,9 @@
 return {
   {
     "L3MON4D3/LuaSnip",
+    version = "2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    -- build = "make install_jsregexp",
     dependencies = {
       "rafamadriz/friendly-snippets",
       config = function()
@@ -16,9 +19,10 @@ return {
       if opts then
         require("luasnip").config.setup(opts)
       end
-      vim.tbl_map(function(type)
-        require("luasnip.loaders.from_" .. type).lazy_load()
-      end, { "vscode", "snipmate", "lua" })
+      require("luasnip.loaders.from_vscode").lazy_load({ paths = "./snippets" })
+
+      local snip = require('luasnip')
+      snip.filetype_extend("cs", { "csharpdoc", "fe_snippets" })
     end,
   },
   {
@@ -77,10 +81,10 @@ return {
       return {
         enabled = function()
           local dap_prompt = util.has("cmp-dap") -- add interoperability with cmp-dap
-            and vim.tbl_contains(
-              { "dap-repl", "dapui_watches", "dapui_hover" },
-              vim.api.nvim_get_option_value("filetype", { buf = 0 })
-            )
+              and vim.tbl_contains(
+                { "dap-repl", "dapui_watches", "dapui_hover" },
+                vim.api.nvim_get_option_value("filetype", { buf = 0 })
+              )
           if vim.api.nvim_get_option_value("buftype", { buf = 0 }) == "prompt" and not dap_prompt then
             return false
           end
@@ -150,9 +154,9 @@ return {
         }),
         sources = cmp.config.sources({
           { name = "nvim_lsp", priority = 1000 },
-          { name = "luasnip", priority = 750 },
-          { name = "buffer", priority = 500 },
-          { name = "path", priority = 250 },
+          { name = "luasnip",  priority = 750 },
+          { name = "buffer",   priority = 500 },
+          { name = "path",     priority = 250 },
         }),
         experimental = {
           ghost_text = {
@@ -160,6 +164,7 @@ return {
           },
         },
         sorting = defaults.sorting,
+        name = "buffer"
       }
     end,
   },

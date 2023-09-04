@@ -7,16 +7,9 @@ local function diagnostic_goto(next, severity)
 end
 
 local keys = {
-  {
-    "gd",
-    function()
-      require("telescope.builtin").lsp_definitions({ reuse_win = true })
-    end,
-    desc = "Goto Definition",
-    has = "definition",
-  },
+  { "gd", vim.lsp.buf.definition,              desc = "Goto Definition", has = "definition", },
   { "gr", "<cmd>Telescope lsp_references<cr>", desc = "References" },
-  { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+  { "gD", vim.lsp.buf.declaration,             desc = "Goto Declaration" },
   {
     "gI",
     function()
@@ -31,15 +24,15 @@ local keys = {
     end,
     desc = "Goto T[y]pe Definition",
   },
-  { "K", vim.lsp.buf.hover, desc = "Hover" },
-  { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
-  { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-  { "]d", diagnostic_goto(true), desc = "Next Diagnostic" },
-  { "[d", diagnostic_goto(false), desc = "Prev Diagnostic" },
-  { "]e", diagnostic_goto(true, "ERROR"), desc = "Next Error" },
-  { "[e", diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
-  { "]w", diagnostic_goto(true, "WARN"), desc = "Next Warning" },
-  { "[w", diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
+  { "K",     vim.lsp.buf.hover,               desc = "Hover" },
+  { "gK",    vim.lsp.buf.signature_help,      desc = "Signature Help", has = "signatureHelp" },
+  { "<c-k>", vim.lsp.buf.signature_help,      mode = "i",              desc = "Signature Help", has = "signatureHelp" },
+  { "]d",    diagnostic_goto(true),           desc = "Next Diagnostic" },
+  { "[d",    diagnostic_goto(false),          desc = "Prev Diagnostic" },
+  { "]e",    diagnostic_goto(true, "ERROR"),  desc = "Next Error" },
+  { "[e",    diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
+  { "]w",    diagnostic_goto(true, "WARN"),   desc = "Next Warning" },
+  { "[w",    diagnostic_goto(false, "WARN"),  desc = "Prev Warning" },
 }
 if require("util").has("inc-rename.nvim") then
   keys[#keys + 1] = {
