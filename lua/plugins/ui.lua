@@ -67,24 +67,24 @@ return {
             { "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
           },
           lualine_x = {
-              -- stylua: ignore
-              {
-                function() return require("noice").api.status.command.get() end,
-                cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
-                color = Util.fg("Statement"),
-              },
-              -- stylua: ignore
-              {
-                function() return require("noice").api.status.mode.get() end,
-                cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
-                color = Util.fg("Constant"),
-              },
-              -- stylua: ignore
-              {
-                function() return "  " .. require("dap").status() end,
-                cond = function () return package.loaded["dap"] and require("dap").status() ~= "" end,
-                color = Util.fg("Debug"),
-              },
+            -- stylua: ignore
+            {
+              function() return require("noice").api.status.command.get() end,
+              cond = function() return package.loaded["noice"] and require("noice").api.status.command.has() end,
+              color = Util.fg("Statement"),
+            },
+            -- stylua: ignore
+            {
+              function() return require("noice").api.status.mode.get() end,
+              cond = function() return package.loaded["noice"] and require("noice").api.status.mode.has() end,
+              color = Util.fg("Constant"),
+            },
+            -- stylua: ignore
+            {
+              function() return "  " .. require("dap").status() end,
+              cond = function() return package.loaded["dap"] and require("dap").status() ~= "" end,
+              color = Util.fg("Debug"),
+            },
             { require("lazy.status").updates, cond = require("lazy.status").has_updates, color = Util.fg("Special") },
             {
               "diff",
@@ -96,7 +96,11 @@ return {
             },
           },
           lualine_y = {
-            { "progress", separator = " ", padding = { left = 1, right = 0 } },
+            {
+              "progress",
+              separator = " ",
+              padding = { left = 1, right = 0 }
+            },
             { "location", padding = { left = 0, right = 1 } },
           },
         },
@@ -111,23 +115,15 @@ return {
   -- indent guides for Neovim
   {
     "lukas-reineke/indent-blankline.nvim",
-    event = { "BufReadPost", "BufNewFile" },
+    main = "ibl",
     opts = {
-      char = "│",
-      filetype_exclude = {
-        "help",
-        "alpha",
-        "dashboard",
-        "neo-tree",
-        "Trouble",
-        "lazy",
-        "mason",
-        "notify",
-        "toggleterm",
-        "lazyterm",
+      indent = {
+        char = "│",
       },
-      show_trailing_blankline_indent = false,
-      show_current_context = false,
+      whitespace = {
+        remove_blankline_trail = false,
+      },
+      scope = { enabled = false },
     },
   },
 
@@ -167,5 +163,5 @@ return {
   -- icons
   { "nvim-tree/nvim-web-devicons", lazy = true },
   -- ui components
-  { "MunifTanjim/nui.nvim", lazy = true },
+  { "MunifTanjim/nui.nvim",        lazy = true },
 }
