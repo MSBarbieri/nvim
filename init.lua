@@ -3,9 +3,10 @@
 local opts = {
   colorscheme = "catppuccin",
   g = {
-    cmp_enabled = true,
-    mapleader = " ",
+    cmp_enabled    = true,
+    mapleader      = " ",
     maplocalleader = "\\",
+    editorconfig   = true
   },
   opt = {
     breakindent = false,                             -- Wrap indent to match  line start
