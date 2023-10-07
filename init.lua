@@ -1,7 +1,7 @@
 -- Created By msbarbieri <matheussouzabariberi@gmail.com>
 
 local opts = {
-  colorscheme = "catppuccin",
+  colorscheme = "tokyonight",
   g = {
     cmp_enabled    = true,
     mapleader      = " ",
