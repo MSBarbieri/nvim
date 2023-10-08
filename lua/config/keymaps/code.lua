@@ -17,6 +17,7 @@ return function(map)
   map({ "n", "v" }, "<leader>cu", "<cmd>TodoTelescope<cr>", { desc = "Todo" })
   map({ "n", "v" }, "<leader>ct", "<cmd>Telescope diagnostics<cr>", { desc = "Diagnostics" })
 
+  map("n", "<leader>cr", "<cmd>IncRename <cr>")
   map("n", "<leader>c/", function()
     local lang = vim.bo.filetype
     vim.api.nvim_command(":CheatWithoutComments " .. lang)

@@ -126,7 +126,13 @@ return {
   {
     'windwp/nvim-autopairs',
     event = "InsertEnter",
-    opts = {} -- this is equalent to setup({}) function
+    opts = {}
   },
-  { 'ionide/Ionide-vim' }
+  { 'ionide/Ionide-vim' },
+  {
+    "smjonas/inc-rename.nvim",
+    config = function()
+      require("inc_rename").setup()
+    end,
+  },
 }
