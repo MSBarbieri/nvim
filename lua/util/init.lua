@@ -1,11 +1,25 @@
 local M = {}
 
-function M.on_attach(on_attach)
+function M.get_clients(...)
+  local fn = vim.lsp.get_clients or vim.lsp.get_active_clients
+  return fn(...)
+end
+
+function M.opts(name)
+  local plugin = require("lazy.core.config").plugins[name]
+  if not plugin then
+    return {}
+  end
+  local Plugin = require("lazy.core.plugin")
+  return Plugin.values(plugin, "opts", false)
+end
+
+function M.on_attach(cb)
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)
       local buffer = args.buf
       local client = vim.lsp.get_client_by_id(args.data.client_id)
-      on_attach(client, buffer)
+      cb(client, buffer)
     end,
   })
 end
@@ -65,16 +79,16 @@ function M.file_worktrees()
   local file = vim.fn.expand("%")
   for _, worktree in ipairs(worktrees) do
     if
-      require("astronvim.utils").cmd({
-        "git",
-        "--work-tree",
-        worktree.toplevel,
-        "--git-dir",
-        worktree.gitdir,
-        "ls-files",
-        "--error-unmatch",
-        file,
-      }, false)
+        require("astronvim.utils").cmd({
+          "git",
+          "--work-tree",
+          worktree.toplevel,
+          "--git-dir",
+          worktree.gitdir,
+          "ls-files",
+          "--error-unmatch",
+          file,
+        }, false)
     then
       return worktree
     end

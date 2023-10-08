@@ -107,21 +107,6 @@ return {
         end)
       end
 
-      Util.on_attach(function(client, _)
-        if client.server_capabilities.signatureHelpProvider then
-          require('lsp-overloads').setup(client, {
-            keymaps = {
-              next_signature = "<C-j>",
-              previous_signature = "<C-k>",
-              next_parameter = "<C-l>",
-              previous_parameter = "<C-h>",
-              close_signature = "<A-s>"
-            },
-            display_automatically = true -- Uses trigger characters to automatically display the signature overloads when typing a method signature
-          })
-        end
-      end)
-
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
         opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
             or function(diagnostic)
@@ -198,32 +183,6 @@ return {
       if have_mason then
         mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })
       end
-    end,
-  },
-
-  -- formatters
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-      "mason.nvim",
-      {
-        "jay-babu/mason-null-ls.nvim",
-        cmd = { "NullLsInstall", "NullLsUninstall" },
-        opts = { handlers = {} },
-      },
-    },
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        root_dir = require("null-ls.utils").root_pattern(".null-ls-root", ".neoconf.json", "Makefile", ".git"),
-        sources = {
-          nls.builtins.formatting.fish_indent,
-          nls.builtins.diagnostics.fish,
-          nls.builtins.formatting.stylua,
-          nls.builtins.formatting.shfmt,
-        },
-      }
     end,
   },
 }

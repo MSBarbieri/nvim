@@ -3,7 +3,7 @@ return {
   {
     "rcarriga/nvim-notify",
     opts = {
-      timeout = 3000,
+      timeout = 1000,
       max_height = function()
         return math.floor(vim.o.lines * 0.75)
       end,
@@ -11,10 +11,6 @@ return {
         return math.floor(vim.o.columns * 0.75)
       end,
     },
-    config = function(opts)
-      opts.background_colour = "#000000"
-      require("notify").setup(opts)
-    end,
   },
 
   -- better vim.ui
@@ -104,7 +100,7 @@ return {
             { "location", padding = { left = 0, right = 1 } },
           },
         },
-        extensions = { "neo-tree", "lazy" },
+        extensions = { "lazy" },
       }
     end,
     config = function(_, opts)
@@ -156,7 +152,7 @@ return {
         bottom_search = true,
         command_palette = true,
         long_message_to_split = true,
-        inc_rename = false,
+        inc_rename = true,
       },
     },
   },
