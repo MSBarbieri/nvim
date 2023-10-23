@@ -6,11 +6,13 @@ return {
     event = "VeryLazy",
     opts = {
       plugins = { spelling = true },
+      defaults == {
+        ["<leader>t"] = { name = "+test" },
+      }
     },
     config = function(_, opts)
       local wk = require("which-key")
       wk.setup(opts)
-      wk.register(opts.defaults)
     end,
   },
 }

@@ -1,3 +1,6 @@
+vim.notify("Lazy loaded", vim.log.levels.INFO, {
+  title = "Lazy",
+})
 local function map(mode, lhs, rhs, opts)
   local keys = require("lazy.core.handler").handlers.keys
   if not keys.active[keys.parse({ lhs, mode = mode }).id] then
@@ -17,6 +20,7 @@ require("config.keymaps.navigation")(map)
 require("config.keymaps.code")(map)
 require("config.keymaps.telescope")(map)
 require("config.keymaps.dap")(map)
+require("config.keymaps.test")(map)
 -- Plugin Manager
 
 -- navigation ---------------------------------------------------------------------------------------------

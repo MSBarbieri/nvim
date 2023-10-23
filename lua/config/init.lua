@@ -8,16 +8,19 @@ function M.setup(opts)
   M.options = vim.tbl_deep_extend("force", M.defaults, opts or {})
 
   M.load_options()
-  require("config.lazy").setup()
-
+  local group = vim.api.nvim_create_augroup("LazyVim", { clear = true })
   vim.api.nvim_create_autocmd("User", {
-    group = vim.api.nvim_create_augroup("Setup", { clear = true }),
+    group = group,
     pattern = "VeryLazy",
     callback = function()
       M.load_module("autocmds")
       M.load_module("keymaps")
+      M.load_module("envs")
     end,
   })
+
+  require("config.lazy").setup()
+
 
   M.load_theme()
 end

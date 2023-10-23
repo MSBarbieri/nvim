@@ -147,7 +147,18 @@ return {
           keymap = {
             accept = "<C-c>"
           },
-        }
+        },
+        filetypes = {
+          yaml = true,
+          markdown = true,
+          help = false,
+          gitcommit = true,
+          gitrebase = false,
+          hgcommit = false,
+          svn = false,
+          cvs = false,
+          ["."] = true,
+        },
       })
     end,
   }
