@@ -11,14 +11,16 @@ end
 function M.load_dap(_)
   local dap = require('dap')
 
+  if not dap.configurations.typescript then
+    dap.configurations.typescript = {}
+  end
   table.insert(dap.configurations.typescript, {
     type = 'node2',
     request = 'launch',
     name = 'Colmeia Server',
     program = function()
-      local colmeia_path = os.getenv("HOME") .. "/dev/colmeia/"
+      local colmeia_path = os.getenv("HOME") .. "/dev/colmeia/repos/server/"
       local file = colmeia_path .. "dist/server/src/start.js"
-      print("file: ", file)
       return file
     end,
     args = function()
@@ -55,8 +57,9 @@ function M.load_dap(_)
       vim.ui.select(items, opts, cont)
     end)
   end
+
   table.insert(dap.configurations.typescript, {
-    type = 'node2',
+    type = 'pwa-node',
     request = 'launch',
     name = 'Colmeia script',
     program = get_test_files,
@@ -67,11 +70,10 @@ function M.load_dap(_)
   })
 
   table.insert(dap.configurations.typescript, {
-    type = 'node2',
+    type = 'pwa-node',
     request = 'attach',
     name = 'nodemon port:5858',
     sourceMaps = true,
-    outfiles = {},
     restart = true,
     port = 5858,
     cwd = vim.fn.getcwd(),

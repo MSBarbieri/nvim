@@ -26,7 +26,7 @@ if not dap.adapters["pwa-node"] then
   }
 end
 for _, language in ipairs({ "typescript", "javascript", "typescriptreact", "javascriptreact" }) do
-  if not dap.configurations[language] then
+  if dap.configurations[language] then
     table.insert(dap.configurations[language], {
       type = "pwa-node",
       request = "launch",

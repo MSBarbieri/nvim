@@ -33,7 +33,6 @@ return {
         "pyright",
         "rnix-lsp",
         "rust-analyzer",
-        "typescript-language-server",
       },
       automatic_installation = true
     },

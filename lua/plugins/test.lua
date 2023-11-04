@@ -1,31 +1,23 @@
 return {
-  { "nvim-neotest/neotest-plenary" },
   {
     'nvim-neotest/neotest',
+    tag = "v3.4.7",
     dependencies = {
-      'haydenmeade/neotest-jest',
+      { "nvim-neotest/neotest-plenary" },
+      {
+
+        'haydenmeade/neotest-jest',
+        commit = "1a24852",
+      }
     },
     opts = {
       status = { virtual_text = true },
       output = { open_on_run = true },
       quickfix = {
         open = function()
-          vim.cmd("Trouble quickfix")
+          require("trouble").open({ mode = "quickfix", focus = false })
         end,
       },
-      adapters = function()
-        return {
-          require("neotest-plenary"),
-          require('neotest-jest')({
-            jestCommand = "jest",
-            -- jestConfigFile = "jest.config.ts",
-            env = { CI = true },
-            cwd = function(_)
-              return vim.fn.getcwd()
-            end,
-          }),
-        }
-      end
     },
     config = function(_, opts)
       local neotest_ns = vim.api.nvim_create_namespace("neotest")
@@ -70,8 +62,22 @@ return {
         end
       end
 
+      opts.adapters = {
+        require("neotest-plenary"),
+        require('neotest-jest')({
+          jestCommand = "npm test --",
+          jestConfigFile = "jest.config.ts",
+          env = { CI = true },
+          cwd = function(_path)
+            return vim.fn.getcwd()
+          end,
+        }),
+      }
       if opts.adapters then
-        local adapters = {}
+        adapters = {}
+        if type(opts.adapters) == "function" then
+          opts.adapters = opts.adapters()
+        end
         for name, config in pairs(opts.adapters or {}) do
           if type(name) == "number" then
             if type(config) == "string" then
