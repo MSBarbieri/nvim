@@ -15,7 +15,7 @@ function M.setup(opts)
     callback = function()
       M.load_module("autocmds")
       M.load_module("keymaps")
-      M.load_module("envs")
+      M.load_module("envs", opts)
     end,
   })
 
@@ -47,13 +47,18 @@ function M.load_theme()
 end
 
 ---@param name "autocmds" | "options" | "keymaps"
-function M.load_module(name)
+function M.load_module(name, opts)
   local Util = require("lazy.core.util")
 
   local mod = "config." .. name
   Util.try(function()
     -- the real load module
-    require(mod)
+    local mod = require(mod)
+    if type(mod) == "function" then
+      mod()
+    elseif type(mod) == "table" then
+      mod.setup(opts)
+    end
   end, {
     msg = "Failed loading " .. mod,
     on_error = function(msg)

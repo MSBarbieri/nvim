@@ -12,12 +12,7 @@ return {
     },
     opts = {
       status = { virtual_text = true },
-      output = { open_on_run = true },
-      quickfix = {
-        open = function()
-          require("trouble").open({ mode = "quickfix", focus = false })
-        end,
-      },
+      output = { open_on_run = false },
     },
     config = function(_, opts)
       local neotest_ns = vim.api.nvim_create_namespace("neotest")
@@ -67,8 +62,15 @@ return {
         require('neotest-jest')({
           jestCommand = "npm test --",
           jestConfigFile = "jest.config.ts",
-          env = { CI = true },
-          cwd = function(_path)
+          env = (function()
+            local envs = { CI = true }
+            local colmeia = require('config.envs.colmeia')
+            if colmeia.is_colmeia_path(vim.fn.getcwd()) then
+              envs.CORE_ENV_PATH = colmeia.get_colmeia_path() .. "envs/dev"
+            end
+            return envs
+          end)(),
+          cwd = function(_)
             return vim.fn.getcwd()
           end,
         }),

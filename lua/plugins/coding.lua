@@ -125,7 +125,7 @@ return {
   },
   {
     'windwp/nvim-autopairs',
-    event = "InsertEnter",
+    -- event = "InsertEnter",
     opts = {}
   },
   { 'ionide/Ionide-vim' },
@@ -161,5 +161,8 @@ return {
         },
       })
     end,
+  },
+  {
+    "David-Kunz/gen.nvim"
   }
 }

@@ -80,4 +80,13 @@ function M.load_dap(_)
   })
 end
 
+function M.is_colmeia_path(path)
+  local colmeia_path = M.get_colmeia_path()
+  return string.find(path, colmeia_path)
+end
+
+function M.get_colmeia_path()
+  return os.getenv("HOME") .. "/dev/colmeia/"
+end
+
 return M
