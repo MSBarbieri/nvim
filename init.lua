@@ -46,7 +46,10 @@ local opts = {
     foldlevelstart = 99,
     foldenable = true,
     fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
-    termguicolors = true, -- Enable 24-bit RGB color in the TUI
+    termguicolors = true,   -- Enable 24-bit RGB color in the TUI
+    textwidth = 80,         -- Maximum width of text that is being inserted
+    tw = 80,
+    colorcolumn = "80,100", -- Color column
   },
 }
 

@@ -18,6 +18,7 @@ return function(map)
   map("v", ">", ">gv", { desc = "Ident Line" })
   map("v", "<S-Tab>", "<gv", { desc = "Unident Line" })
   map("v", "<Tab>", ">gv", { desc = "Ident Line" })
+  map("v", "q", "gq", { desc = "format text" })
 
   map("n", "<C-j>", "<C-w>j", { desc = "Move to above split" })
   map("n", "<C-k>", "<C-w>k", { desc = "Move to below split" })
