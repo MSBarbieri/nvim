@@ -19,7 +19,7 @@ function M.load_dap(_)
     request = 'launch',
     name = 'Colmeia Server',
     program = function()
-      local colmeia_path = os.getenv("HOME") .. "/dev/colmeia/repos/server/"
+      local colmeia_path = os.getenv("HOME") .. "/dev/colmeia/repos/backend/server/"
       local file = colmeia_path .. "dist/server/src/start.js"
       return file
     end,
