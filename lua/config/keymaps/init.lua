@@ -13,17 +13,14 @@ local function map(mode, lhs, rhs, opts)
   end
 end
 
+local hydra = require('hydra')
+
 require("config.keymaps.core")(map)
-require("config.keymaps.git")(map)
+require("config.keymaps.git")(hydra)
 require("config.keymaps.terminal")(map)
-require("config.keymaps.navigation")(map)
+require("config.keymaps.harpoon")(hydra)
 require("config.keymaps.code")(map)
 require("config.keymaps.telescope")(map)
 require("config.keymaps.dap")(map)
 require("config.keymaps.test")(map)
 -- Plugin Manager
-
--- navigation ---------------------------------------------------------------------------------------------
--- harpoon
-
--- map("n", "<leader>h", { name = "+Harpoon" })
