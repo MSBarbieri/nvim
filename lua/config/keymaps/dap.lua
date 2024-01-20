@@ -8,15 +8,47 @@ local function get_args(config)
   end
   return config
 end
-return function(map)
-  map("n", "<leader>dt", require("dap").toggle_breakpoint, { desc = "Toggle breakpoint" })
-  map("n", "<leader>dc", require("dap").continue, { desc = "Start/Continue" })
-  map("n", "<leader>di", require("dap").step_into, { desc = "Step Into" })
-  map("n", "<leader>do", require("dap").step_over, { desc = "Step Over" })
-  map("n", "<leader>du", require("dap").step_out, { desc = "Step Out" })
-  map("n", "<leader>ds", function()
-    require("dapui").toggle()
-  end, { desc = "Toggle Debugger UI" })
-  map("n", "<leader>da", function() require("dap").continue({ before = get_args }) end, { desc = "Run with Args" })
-  map("n", "<leader>td", function() require("neotest").run.run({ strategy = "dap" }) end, { desc = "Debug Nearest" })
+
+return function(hydra)
+  hydra({
+    name = "Dap",
+    hint = [[
+                  Dap
+----------------------
+ _t_: Toggle Breakpoint
+ _c_:          Continue
+ _i_:         Step Into
+ _o_:         Step Over
+ _u_:          Step Out
+ _s_:         Toggle UI
+ _r_:     Run with Args
+----------------------
+ _<Esc>_ | _q_:      exit
+    ]],
+    config = {
+      color = 'teal',
+      invoke_on_body = true,
+      timeout = true,
+      hint = {
+        type = "window",
+        position = "bottom-right",
+        border = "rounded",
+      },
+    },
+    mode = { 'n', 'x' },
+    body = '<leader>d',
+    heads = {
+      { "t", require("dap").toggle_breakpoint, { desc = "Toggle breakpoint" } },
+      { "c", require("dap").continue,          { desc = "Start/Continue" } },
+      { "i", require("dap").step_into,         { desc = "Step Into" } },
+      { "o", require("dap").step_over,         { desc = "Step Over" } },
+      { "u", require("dap").step_out,          { desc = "Step Out" } },
+      { "s", function()
+        require("dapui").toggle()
+      end, { desc = "Toggle Debugger UI" } },
+      { "r",     function() require("dap").continue({ before = get_args }) end, { desc = "Run with Args" } },
+      { 'q',     nil,                                                           { desc = 'exit' } },
+      { '<Esc>', nil,                                                           { desc = 'exit' } },
+    }
+  })
 end

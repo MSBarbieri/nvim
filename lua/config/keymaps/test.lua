@@ -8,4 +8,5 @@ return function(map)
     { desc = "Show Output" })
   map("n", "<leader>tO", function() require("neotest").output_panel.toggle() end, { desc = "Toggle Output Panel" })
   map("n", "<leader>tS", function() require("neotest").run.stop() end, { desc = "Stop" })
+  map("n", "<leader>td", function() require("neotest").run.run({ strategy = "dap" }) end, { desc = "Debug Nearest" })
 end

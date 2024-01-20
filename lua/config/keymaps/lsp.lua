@@ -34,19 +34,5 @@ local keys = {
   { "]w",    diagnostic_goto(true, "WARN"),   desc = "Next Warning" },
   { "[w",    diagnostic_goto(false, "WARN"),  desc = "Prev Warning" },
 }
-if require("util").has("inc-rename.nvim") then
-  keys[#keys + 1] = {
-    "<leader>cr",
-    function()
-      local inc_rename = require("inc_rename")
-      return ":" .. inc_rename.config.cmd_name .. " " .. vim.fn.expand("<cword>")
-    end,
-    expr = true,
-    desc = "Rename",
-    has = "rename",
-  }
-else
-  keys[#keys + 1] = { "<leader>cr", vim.lsp.buf.rename, desc = "Rename", has = "rename" }
-end
 
 return keys

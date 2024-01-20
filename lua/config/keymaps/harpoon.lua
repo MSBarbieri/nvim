@@ -2,7 +2,7 @@ return function(hydra)
   hydra({
     name = "Harpoon",
     hint = [[
- Harpoon
+            Harpoon
 --------------------
  _a_:             add
  _t_:          toggle
