@@ -1,6 +1,7 @@
 local Util = require("util")
 return {
   -- fuzzy finder
+  { "mrjones2014/smart-splits.nvim" },
   {
     "nvim-telescope/telescope.nvim",
     cmd = "Telescope",

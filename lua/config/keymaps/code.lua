@@ -1,4 +1,4 @@
-return function(hydra)
+return function(hydra, map)
   hydra({
     name = "Code",
     hint = [[
@@ -50,11 +50,5 @@ return function(hydra)
       { '<Esc>', nil, { desc = 'exit' } },
     }
   })
-  -- map("n", "<leader>z", function()
-  --   require("zen-mode").toggle({
-  --     window = {
-  --       width = 0.85, -- width will be 85% of the editor width
-  --     },
-  --   })
-  -- end, { silent = true, nowait = true, desc = "Zoom Window" })
+  map("n", "<leader>z", require("zen-mode").toggle, { silent = true, nowait = true, desc = "Zoom Window" })
 end

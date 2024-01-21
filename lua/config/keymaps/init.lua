@@ -15,10 +15,10 @@ end
 
 local hydra = require('hydra')
 
-require("config.keymaps.core")(map)
+require("config.keymaps.core")(hydra, map)
 require("config.keymaps.git")(hydra)
 require("config.keymaps.harpoon")(hydra)
-require("config.keymaps.code")(hydra)
+require("config.keymaps.code")(hydra, map)
 require("config.keymaps.telescope")(hydra)
 require("config.keymaps.dap")(hydra)
 -- require("config.keymaps.test")(map)
