@@ -11,6 +11,7 @@ end
 function M.load_dap(_)
   local dap = require('dap')
 
+  local colmeia_path = os.getenv("HOME") .. "/dev/colmeia/repos/backend/server/"
   if not dap.configurations.typescript then
     dap.configurations.typescript = {}
   end
@@ -19,7 +20,6 @@ function M.load_dap(_)
     request = 'launch',
     name = 'Colmeia Server',
     program = function()
-      local colmeia_path = os.getenv("HOME") .. "/dev/colmeia/repos/backend/server/"
       local file = colmeia_path .. "dist/server/src/start.js"
       return file
     end,
@@ -35,7 +35,7 @@ function M.load_dap(_)
     sourceMaps = true,
     protocol = 'inspector',
     console = 'integratedTerminal',
-    cwd = vim.fn.getcwd(),
+    cwd = colmeia_path,
   })
 
   local function get_test_files()

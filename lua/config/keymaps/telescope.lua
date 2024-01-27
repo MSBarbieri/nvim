@@ -1,9 +1,9 @@
 return function(map)
-  map("n", "<leader>f$", "<cmd>Lazy<cr>", { desc = "Lazy" })
-  map("n", "<leader>fm", "<cmd>Mason<cr>", { desc = "Mason" })
-  map("n", "<leader>fa", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
-  map("n", "<space>fe", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
+  map("n", "<leader>t$", "<cmd>Lazy<cr>", { desc = "Lazy" })
+  map("n", "<leader>tm", "<cmd>Mason<cr>", { desc = "Mason" })
+  map("n", "<leader>ta", "<cmd>Telescope find_files<cr>", { desc = "Find Files" })
+  map("n", "<space>te", "<cmd>Telescope live_grep<cr>", { desc = "Live Grep" })
 
-  map({ "n", "v" }, "<leader>f,", "<cmd>TodoTelescope<cr>", { desc = "Find Todos" })
-  map({ "n", "v" }, "<leader>f.", "<cmd>Telescope diagnostics<cr>", { desc = "Find Diagnostics" })
+  map({ "n", "v" }, "<leader>t,", "<cmd>TodoTelescope<cr>", { desc = "Find Todos" })
+  map({ "n", "v" }, "<leader>t.", "<cmd>Telescope diagnostics<cr>", { desc = "Find Diagnostics" })
 end
