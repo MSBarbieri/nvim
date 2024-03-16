@@ -20,7 +20,7 @@ require("config.keymaps.navigation")(map)
 require("config.keymaps.code")(map)
 require("config.keymaps.telescope")(map)
 require("config.keymaps.dap")(map)
-require("config.keymaps.test")(map)
+-- require("config.keymaps.test")(map)
 -- Plugin Manager
 
 -- navigation ---------------------------------------------------------------------------------------------
