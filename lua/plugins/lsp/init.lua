@@ -182,12 +182,6 @@ return {
 
       local ensure_installed = {} ---@type string[]
 
-      servers.omnisharp = {
-        handlers = {
-          ["textDocument/definition"] = require('omnisharp_extended').handler,
-        },
-      }
-
       for server, server_opts in pairs(servers) do
         if server_opts then
           server_opts = server_opts == true and {} or server_opts
