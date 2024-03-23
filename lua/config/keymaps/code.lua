@@ -31,17 +31,17 @@ return function(hydra, map)
     mode = { 'n', 'v', 'x' },
     body = '<leader>c',
     heads = {
-      { "a", vim.lsp.buf.code_action,              { desc = "Action" } },
-      { "c", vim.lsp.buf.signature_help,           { desc = "Signature Help" } },
-      { "e", vim.diagnostic.setloclist,            { desc = "Quickfix" } },
-      { "h", vim.diagnostic.goto_prev,             { desc = "Prev Diagnostics", exit = false } },
-      { "l", vim.diagnostic.goto_next,             { desc = "Next Diagnostics", exit = false } },
-      { ",", require("plugins.lsp.format").format, { desc = "Format Document" } },
-      { "r", "<cmd>IncRename <cr>",                { desc = "Incremental Rename" } },
-      { ".", vim.diagnostic.open_float,            { desc = "Line Diagnostics" } },
-      { "d", vim.diagnostic.open_float,            { desc = "Line Diagnostics" } },
-      { "$", "<cmd>LspInfo<cr>",                   { desc = "Lsp Info" } },
-      { "z", require("zen-mode").toggle,           { desc = "Zen Mode" } },
+      { "a", vim.lsp.buf.code_action,    { desc = "Action" } },
+      { "c", vim.lsp.buf.signature_help, { desc = "Signature Help" } },
+      { "e", vim.diagnostic.setloclist,  { desc = "Quickfix" } },
+      { "h", vim.diagnostic.goto_prev,   { desc = "Prev Diagnostics", exit = false } },
+      { "l", vim.diagnostic.goto_next,   { desc = "Next Diagnostics", exit = false } },
+      { ",", vim.lsp.buf.format,         { desc = "Format Document" } },
+      { "r", ":IncRename ",              { desc = "Incremental Rename" } },
+      { ".", vim.diagnostic.open_float,  { desc = "Line Diagnostics" } },
+      { "d", vim.diagnostic.open_float,  { desc = "Line Diagnostics" } },
+      { "$", "<cmd>LspInfo<cr>",         { desc = "Lsp Info" } },
+      { "z", require("zen-mode").toggle, { desc = "Zen Mode" } },
       { "/", function()
         local lang = vim.bo.filetype
         vim.api.nvim_command(":CheatWithoutComments " .. lang)

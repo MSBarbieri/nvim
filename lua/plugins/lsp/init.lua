@@ -29,7 +29,27 @@ return {
           prefix = "●",
         },
         severity_sort = true,
-        signs = { active = require("plugins.lsp.format").signs() },
+        signs = {
+          active = (function()
+            local icons = require("config.icons")
+
+            local signs = {
+              { name = "DiagnosticSignError",    text = icons.diagnostics.Error,         texthl = "DiagnosticSignError" },
+              { name = "DiagnosticSignWarn",     text = icons.diagnostics.Warn,          texthl = "DiagnosticSignWarn" },
+              { name = "DiagnosticSignHint",     text = icons.diagnostics.Hint,          texthl = "DiagnosticSignHint" },
+              { name = "DiagnosticSignInfo",     text = icons.diagnostics.Info,          texthl = "DiagnosticSignInfo" },
+              { name = "DapStopped",             text = icons.dap.Stopped[1],            texthl = "DiagnosticWarn" },
+              { name = "DapBreakpoint",          text = icons.dap.Breakpoint,            texthl = "DiagnosticInfo" },
+              { name = "DapBreakpointRejected",  text = icons.dap.BreakpointRejected[1], texthl = "DiagnosticError" },
+              { name = "DapBreakpointCondition", text = icons.dap.BreakpointCondition,   texthl = "DiagnosticInfo" },
+              { name = "DapLogPoint",            text = icons.dap.LogPoint,              texthl = "DiagnosticInfo" },
+            }
+            for _, sign in ipairs(signs) do
+              vim.fn.sign_define(sign.name, sign)
+            end
+            return signs
+          end)()
+        },
         float = { border = "single" },
       },
       inlay_hints = {
@@ -38,7 +58,7 @@ return {
       capabilities = {
         textDocument = {
           foldingRange = {
-            dynamicRegistration = false,
+            dynamicRegistration = true,
             lineFoldingOnly = true,
           },
         },
@@ -74,7 +94,6 @@ return {
         require("neoconf").setup(require("lazy.core.plugin").values(plugin, "opts", false))
       end
 
-      require("plugins.lsp.format").setup(opts)
       Util.on_attach(function(client, buffer)
         require("plugins.lsp.keymaps").on_attach(client, buffer)
       end)
@@ -108,7 +127,8 @@ return {
       end
 
       if type(opts.diagnostics.virtual_text) == "table" and opts.diagnostics.virtual_text.prefix == "icons" then
-        opts.diagnostics.virtual_text.prefix = vim.fn.has("nvim-0.10.0") == 0 and "●"
+        opts.diagnostics.virtual_text.prefix =
+            vim.fn.has("nvim-0.10.0") == 0 and "●"
             or function(diagnostic)
               local icons = require("config").icons.diagnostics
               for d, icon in pairs(icons) do

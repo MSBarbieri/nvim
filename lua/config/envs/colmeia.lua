@@ -26,10 +26,16 @@ function M.load_dap(_)
     end,
     args = function()
       return coroutine.create(function(dap_run_co)
-        vim.ui.select({ 'server', 'bot', 'ms-consumer', 'scheduler' }, {
+        vim.ui.select({ 'server', 'bot', 'ms-consumer', 'scheduler', 'longrun' }, {
           prompt = 'Select your service:',
         }, function(service)
-          coroutine.resume(dap_run_co, { "--service=" .. service })
+          if (service == 'longrun') then
+            vim.ui.input('Enter job data:', function(job_data)
+              coroutine.resume(dap_run_co, { "--service", service, "--job-data", job_data })
+            end)
+          else
+            coroutine.resume(dap_run_co, { "--service", service })
+          end
         end)
       end)
     end,
