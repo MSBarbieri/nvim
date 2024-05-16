@@ -45,6 +45,7 @@ local opts = {
     foldlevel = 99,                                  -- Using ufo provider need a large value, feel free to decrease the value
     foldlevelstart = 99,
     foldenable = true,
+    foldmethod = "indent",
     fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
     termguicolors = true,   -- Enable 24-bit RGB color in the TUI
     textwidth = 80,         -- Maximum width of text that is being inserted

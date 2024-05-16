@@ -193,6 +193,7 @@ return {
           end
         end
       end
+      setup('gleam')
 
       if have_mason then
         mlsp.setup({ ensure_installed = ensure_installed, handlers = { setup } })

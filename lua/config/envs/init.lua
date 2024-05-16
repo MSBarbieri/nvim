@@ -1,15 +1,10 @@
 local M = {}
-local colmeia = require('config.envs.colmeia')
 function M.load_env(env)
   local current_path = vim.fn.getcwd()
-  if env.is_colmeia_path(current_path) then
-    env.setup(opts)
-  end
 end
 
 function M.setup()
   M.default_node_dap()
-  M.load_env(colmeia)
 end
 
 function M.default_node_dap()

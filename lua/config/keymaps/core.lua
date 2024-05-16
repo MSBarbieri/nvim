@@ -68,10 +68,10 @@ return function(hydra, map)
       { 'k',     pcmd('wincmd k', 'E11', 'close') },
       { 'l',     '<C-w>l' },
 
-      { 'H',     cmd 'WinShift left' },
-      { 'J',     cmd 'WinShift down' },
-      { 'K',     cmd 'WinShift up' },
-      { 'L',     cmd 'WinShift right' },
+      { 'H',     '<C-w>H' },
+      { 'J',     '<C-w>J' },
+      { 'K',     '<C-w>K' },
+      { 'L',     '<C-w>L' },
 
       { '<C-h>', function() splits.resize_left(2) end },
       { '<C-j>', function() splits.resize_down(2) end },
@@ -111,8 +111,11 @@ return function(hydra, map)
   map("n", "<leader>w", "<cmd>w<cr>", { desc = "Save File" })
   map("n", "<leader>q", "<cmd>q<cr>", { desc = "Close Window" })
   map("n", "<leader>n", "<cmd>enew<cr>", { desc = "New File" })
-  map("n", "<C-s>", "<cmd>w!<cr>", { desc = "Force Write" })
-  map("n", "<C-q>", "<cmd>q!<cr>", { desc = "Force Quit" })
+
+  vim.keymap.set("n", "<leader>k", "<cmd>cnext<CR>zz", { desc = "cnext" })
+  vim.keymap.set("n", "<leader>j", "<cmd>cprev<CR>zz", { desc = "cprev" })
+  vim.keymap.set("n", "<leader>lk", "<cmd>lnext<CR>zz", { desc = "lnext" })
+  vim.keymap.set("n", "<leader>lj", "<cmd>lprev<CR>zz", { desc = "lprev" })
 
   -- better indenting
   map("v", "<", "<gv", { desc = "Unident Line" })

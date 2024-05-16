@@ -64,10 +64,6 @@ return {
           jestConfigFile = "jest.config.ts",
           env = (function()
             local envs = { CI = true }
-            local colmeia = require('config.envs.colmeia')
-            if colmeia.is_colmeia_path(vim.fn.getcwd()) then
-              envs.CORE_ENV_PATH = colmeia.get_colmeia_path() .. "envs/dev"
-            end
             return envs
           end)(),
           cwd = function(_)

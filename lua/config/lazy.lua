@@ -1,3 +1,4 @@
+local utils = require('util')
 local M = {}
 
 M.setup = function()
@@ -16,6 +17,8 @@ M.setup = function()
   end
 
   vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
+
+  utils.lazy_notify()
 
   require("lazy").setup({
     spec = {
