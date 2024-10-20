@@ -40,6 +40,12 @@ if true then return {
       },
     },
   },
+  {
+    "LazyVim/LazyVim",
+    opts = {
+      colorscheme = "tokyonight",
+    },
+  },
 } end
 
 -- every spec file under the "plugins" directory will be loaded automatically by lazy.nvim
