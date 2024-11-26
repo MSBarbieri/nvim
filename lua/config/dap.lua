@@ -3,8 +3,6 @@ function M.setup()
   M.default_node_dap()
 end
 
-local cmp_nvim_lsp = require("cmp_nvim_lsp")
-
 function M.default_node_dap()
   local dap = require("dap")
 
@@ -43,14 +41,6 @@ function M.default_node_dap()
       })
     end
   end
-
-  require("lspconfig").clangd.setup({
-    capabilities = cmp_nvim_lsp.default_capabilities(),
-    cmd = {
-      "clangd",
-      "--offset-encoding=utf-16",
-    },
-  })
 end
 
 return M

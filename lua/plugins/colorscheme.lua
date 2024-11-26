@@ -28,7 +28,6 @@ return {
       flavour = "macchiato",
       integrations = {
         alpha = true,
-        cmp = true,
         flash = true,
         gitsigns = true,
         illuminate = true,
