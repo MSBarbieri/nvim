@@ -8,3 +8,10 @@ vim.keymap.set("n", "<leader>so", function()
   builtin.find_files({ hidden = true })
 end, { desc = "git files" })
 vim.keymap.set("n", "<leader>se", builtin.live_grep, { desc = "live_grep" })
+vim.keymap.set("n", "<leader>z", function()
+  require("zen-mode").toggle({
+    window = {
+      width = 0.85, -- width will be 85% of the editor width
+    },
+  })
+end, { desc = "zen-mode" })
