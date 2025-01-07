@@ -28,3 +28,4 @@ end
 -- Set to "basedpyright" to use basedpyright instead of pyright.
 vim.g.lazyvim_python_lsp = "pyright"
 vim.g.lazyvim_python_ruff = "ruff_lsp"
+vim.g.lazyvim_eslint_auto_format = true
