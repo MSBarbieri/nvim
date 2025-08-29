@@ -13,4 +13,13 @@ return {
     "folke/zen-mode.nvim",
     opts = {},
   },
+  {
+    "karloskar/poetry-nvim",
+    config = function()
+      require("poetry-nvim").setup()
+    end,
+  },
+  {
+    "rshkarin/mason-nvim-lint",
+  },
 }
